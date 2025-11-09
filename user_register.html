@@ -6,25 +6,146 @@
     <title>NoiseScope - User Registration</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        /* Shared styling for the login/register card */
-        .login-container { max-width: 400px; margin: 100px auto; padding: 30px; background: white; border-radius: 8px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); text-align: center; }
-        .login-container h2 { margin-bottom: 20px; color: #28a745; }
-        .login-container input { margin-bottom: 15px; }
-        .login-container button { width: 100%; }
-        .back-link { position: absolute; top: 20px; left: 20px; text-decoration: none; color: #007bff; }
+        /* --- General Body Setup for Fixed Navbar --- */
+        body { 
+            font-family: Arial, sans-serif; 
+            background-color: #f4f7f6; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            min-height: 100vh; 
+            margin: 0; 
+            /* Push content down to clear fixed navbar */
+            padding-top: 60px; 
+        }
+
+        /* --- Navbar Styles (New) --- */
+        .navbar {
+            width: 100%;
+            background-color: #343a40;
+            padding: 10px 0;
+            position: fixed; /* Fixed/Sticky Navbar */
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        .navbar-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between; 
+            align-items: center;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 8px 15px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+            font-size: 14px;
+        }
+        .navbar a:hover {
+            background-color: #495057;
+        }
+        .back-link-nav { /* Style for the 'Back to Login' link */
+            color: #ccc;
+            font-weight: normal; 
+        }
+        .back-link-nav:hover {
+            color: white;
+            text-decoration: underline;
+            background-color: transparent;
+        }
+
+        /* --- Form Container Styles --- */
+        .login-container { 
+            max-width: 400px; 
+            margin: 30px 20px; /* Adjusted margin to not clash with fixed nav */
+            padding: 30px; 
+            background: white; 
+            border-radius: 8px; 
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
+            text-align: center; 
+            width: 100%; /* Ensure it respects max-width */
+            box-sizing: border-box;
+            animation: fadeIn 0.8s ease-out; /* Smooth entrance effect */
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .login-container h2 { 
+            margin-bottom: 20px; 
+            color: #28a745; 
+        }
+        /* Added form-group for label clarity */
+        .form-group {
+            text-align: left;
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+            font-size: 14px;
+        }
+        
+        .login-container input { 
+            width: 100%; 
+            padding: 10px; 
+            border: 1px solid #ccc; 
+            border-radius: 4px; 
+            box-sizing: border-box;
+            margin-bottom: 0px; /* Reset original margin for use with form-group */
+        }
+        .login-container button { 
+            width: 100%; 
+            padding: 12px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s, transform 0.1s;
+        }
+        .login-container button:hover {
+            background-color: #1e7e34;
+        }
+        .login-container button:active {
+            transform: scale(0.99); 
+        }
+
+        /* Removed and integrated: The original 'back-link' CSS (position: absolute) and the 'header' block are no longer needed. */
+        .back-link { display: none; } 
+        header { display: none; }
     </style>
 </head>
 <body>
-    <header>
-        <h1>User Registration 📝</h1>
-        <a href="user_login.html" class="back-link">← Back to Login</a>
-    </header>
-
+    <nav class="navbar">
+        <div class="navbar-content">
+            <a href="index.html">🏠 NoiseScope Home</a> 
+            <a href="user_login.html" class="back-link-nav">← Back to Login</a>
+        </div>
+    </nav>
+    
     <div class="login-container">
         <h2>Create Contributor Account</h2>
         <form id="registerForm">
-            <input type="text" id="username" placeholder="Choose Username" required>
-            <input type="password" id="password" placeholder="Choose Password (min 6 chars)" required minlength="6">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" placeholder="Choose Username" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="Choose Password (min 6 chars)" required minlength="6">
+            </div>
+
             <button type="submit" id="registerButton">Register</button>
             <p id="registerMessage" style="color: red; margin-top: 10px;"></p>
         </form>

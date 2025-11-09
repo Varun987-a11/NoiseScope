@@ -4,67 +4,199 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NoiseScope - Access Portal</title>
-    <link rel="stylesheet" href="style.css">
+    <!-- Removed external style.css link for single-file mandate -->
     <style>
-        header {
-            background-color: #1a1a2e;
-            color: white;
-            padding: 20px 0;
-            text-align: center;
-            border-bottom: 5px solid #007bff;
-        }
-        .header-logo {
-            width: 120px; /* Larger logo size */
-            height: 120px;
-            display: block;
-            margin: 0 auto 15px;
-            border-radius: 18px;
-            box-shadow: 0 0 20px rgba(100, 50, 255, 0.8);
+        :root {
+            /* Professional Color Palette */
+            --color-dark: #1a1a2e;
+            --color-primary: #2ecc71; /* Green for User/Success */
+            --color-secondary: #e74c3c; /* Red for Admin/Alert */
+            --color-accent: #3498db; /* Blue for contrast/info */
+            --color-background: #ecf0f1;
         }
 
-        .choice-container {
-            max-width: 600px;
-            margin: 100px auto;
-            padding: 40px;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            text-align: center;
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            
+            /* --- Aesthetic Feature: Contextual Background Image --- */
+            /* Using a high-quality abstract visualization placeholder for 'Noise Reduction' */
+            background-image: url('http://googleusercontent.com/image_collection/image_retrieval/17017156582657206516');
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            
+            /* Aesthetic Feature: Dark Overlay for Readability and Aesthetic Match */
+            background-color: rgba(0, 0, 0, 0.75); /* Deep dark overlay color */
+            background-blend-mode: overlay; /* Blends the dark color with the image */
+            transition: all 0.3s ease;
         }
-        .choice-container h2 { margin-bottom: 30px; color: #007bff; }
+
+        /* --- Professional Header (Preserved Structure) --- */
+        header {
+            width: 100%;
+            background-color: var(--color-dark);
+            color: white;
+            padding: 40px 20px 20px; /* More padding top */
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Aesthetic Feature: Deep Shadow */
+        }
+        
+        .header-logo {
+            /* Updated for image.png */
+            display: block;
+            margin: 0 auto 15px;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%; /* Makes the image circular */
+            box-shadow: 0 0 20px rgba(46, 204, 113, 0.5); /* Glowing effect */
+            background-color: white; /* Backdrop for non-transparent images */
+            object-fit: cover; /* Ensures image fills the circular space neatly */
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin: 0 0 5px 0;
+            font-weight: 700;
+            color: var(--color-primary); /* Highlighted title */
+            letter-spacing: 2px;
+        }
+
+        header p {
+            font-size: 1.1em;
+            opacity: 0.8;
+            margin: 0;
+        }
+
+        /* --- Choice Container (Responsive & Aesthetic) --- */
+        .choice-container {
+            width: 90%; /* Responsive width */
+            max-width: 650px; /* Maximum desktop width */
+            margin: 50px auto 80px;
+            padding: 40px 30px;
+            background: rgba(255, 255, 255, 0.95); /* Slightly transparent white container */
+            border-radius: 12px;
+            /* Aesthetic Feature: A subtle upward glow to highlight the container */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), 0 0 20px rgba(255, 255, 255, 0.3); 
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+        
+        .choice-container h2 { 
+            margin-bottom: 30px; 
+            color: var(--color-dark); 
+            font-size: 1.8em;
+            font-weight: 600;
+        }
+
+        /* --- Responsive Button Layout --- */
+        .choice-buttons {
+            display: flex;
+            gap: 20px; /* Space between buttons */
+            flex-wrap: wrap; /* Allows stacking on small screens */
+            justify-content: center;
+        }
+        
         .choice-buttons a {
-            display: inline-block;
-            width: 45%;
-            padding: 20px;
-            margin: 10px;
+            flex-grow: 1; 
+            min-width: 250px; 
+            padding: 25px 20px;
             text-decoration: none;
             font-size: 1.2em;
-            border-radius: 6px;
-            transition: background-color 0.3s;
+            font-weight: 700;
+            border-radius: 10px;
+            transition: all 0.3s ease; 
+            border: 2px solid transparent;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
         }
-        .admin-btn { background-color: #dc3545; color: white; }
-        .user-btn { background-color: #28a745; color: white; }
-        .admin-btn:hover { background-color: #c82333; }
-        .user-btn:hover { background-color: #1e7e34; }
+
+        /* --- Admin Button Styling (Distinct Color) --- */
+        .admin-btn { 
+            background: linear-gradient(135deg, var(--color-secondary), #c0392b); 
+            color: white; 
+        }
+        .admin-btn:hover { 
+            background: linear-gradient(135deg, #c0392b, #a92a1c);
+            transform: translateY(-3px) scale(1.02); 
+            box-shadow: 0 10px 20px rgba(231, 76, 60, 0.4); 
+            border-color: white;
+        }
+
+        /* --- User/Contributor Button Styling (Distinct Color) --- */
+        .user-btn { 
+            background: linear-gradient(135deg, var(--color-primary), #27ae60); 
+            color: white; 
+        }
+        .user-btn:hover { 
+            background: linear-gradient(135deg, #27ae60, #209355); 
+            transform: translateY(-3px) scale(1.02); 
+            box-shadow: 0 10px 20px rgba(46, 204, 113, 0.4); 
+            border-color: white;
+        }
+
+        /* Button content styles */
+        .choice-buttons a span {
+            display: block;
+            font-size: 2.5em; /* Icon size */
+            margin-bottom: 10px;
+        }
+        .choice-buttons a p {
+            font-size: 0.8em; 
+            margin: 5px 0 0 0;
+            font-weight: 400;
+            opacity: 0.9;
+        }
+
+        /* Mobile Adjustments (Responsive Feature) */
+        @media (max-width: 600px) {
+            .choice-container {
+                margin: 30px 10px 50px;
+                padding: 20px;
+            }
+            .choice-buttons {
+                flex-direction: column; /* Force stacking */
+                gap: 15px;
+            }
+            .choice-buttons a {
+                width: 100%;
+                min-width: unset;
+            }
+            header h1 {
+                font-size: 2em;
+            }
+            header {
+                padding: 30px 10px 15px;
+            }
+        }
     </style>
 </head>
 <body>
     <header>
+        <!-- Logo now uses the external image.png file -->
         <img src="image.png" alt="NoiseScope Logo" class="header-logo">
         <h1>NoiseScope</h1>
         <p>A Crowdsourced System For Ambient Noise Mapping</p>
     </header>
 
     <div class="choice-container">
-        <h2>Who are you?</h2>
+        <h2>Select Your Role to Continue</h2>
         <div class="choice-buttons">
             <a href="admin_login.html" class="admin-btn">
+                <!-- Emoji/Icon Feature: Using distinct emojis for quick recognition -->
+                <span>🔑</span>
                 ADMIN
-                <p style="font-size: 0.7em; margin-top: 5px;">(Dashboard & Management)</p>
+                <p>Dashboard & System Management</p>
             </a>
             <a href="user_login.html" class="user-btn">
+                <span>👂</span>
                 USER / CONTRIBUTOR
-                <p style="font-size: 0.7em; margin-top: 5px;">(Submit Noise Data)</p>
+                <p>Submit Noise Data & View Map</p>
             </a>
         </div>
     </div>

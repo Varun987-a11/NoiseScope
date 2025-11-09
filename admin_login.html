@@ -9,11 +9,38 @@
             font-family: Arial, sans-serif; 
             background-color: #f4f7f6; 
             display: flex; 
-            justify-content: center; 
+            /* Change alignment to stack navbar and container vertically */
+            flex-direction: column; 
+            justify-content: flex-start; /* Start content from the top */
             align-items: center; 
             min-height: 100vh; 
             margin: 0; 
         }
+        /* --- New Navbar Styles --- */
+        .navbar {
+            width: 100%;
+            background-color: #343a40; /* Dark background for the navbar */
+            padding: 10px 0;
+            margin-bottom: 20px; /* Space between navbar and content */
+        }
+        .navbar-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 8px 15px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        .navbar a:hover {
+            background-color: #495057;
+        }
+        /* ------------------------- */
+
         .container { 
             background-color: #ffffff; 
             padding: 30px; 
@@ -21,6 +48,9 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
             width: 100%; 
             max-width: 400px; 
+            /* Ensure container doesn't get pushed too far down by the nav */
+            margin-top: 20px;
+            margin-bottom: 50px; /* Add margin for content flow */
         }
         h1 { 
             text-align: center; 
@@ -76,6 +106,11 @@
     </style>
 </head>
 <body>
+    <nav class="navbar">
+        <div class="navbar-content">
+            <a href="index.html">🏠 Home</a>
+        </div>
+    </nav>
     <div class="container">
         <h1>Admin Login</h1>
         <form id="loginForm">
