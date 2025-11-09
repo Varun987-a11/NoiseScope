@@ -86,6 +86,6 @@ This project is licensed under the **MIT License** - see the [LICENSE.md](LICENS
 
 | Name | Role | Email |
 | :--- | :--- | :--- |
-| **[Your Name]** | Project Lead / Developer | [your.email@example.com] |
+| **Varun kumar S** | Project Lead / Developer | varunkumarsaravu@gmail.com |
 
-Project Link: [https://github.com/yourusername/NoiseScope](https://github.com/yourusername/NoiseScope)
+Project Link: [https://github.com/yourusername/NoiseScope](https://github.com/Varun987-a11/NoiseScope )
