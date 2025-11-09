@@ -88,4 +88,4 @@ This project is licensed under the **MIT License** - see the [LICENSE.md](LICENS
 | :--- | :--- | :--- |
 | **Varun kumar S** | Project Lead / Developer | varunkumarsaravu@gmail.com |
 
-Project Link: [https://github.com/yourusername/NoiseScope](https://github.com/Varun987-a11/NoiseScope )
+Project Link: [https://github.com/Varun987-a11/NoiseScope](https://github.com/Varun987-a11/NoiseScope )
