@@ -1,8 +1,8 @@
 # 🔊 NoiseScope: Crowdsourced Ambient Noise Mapping MVP 🗺️
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Project Status](https://img.shields.io/badge/Status-In%20Development-blue)](https://github.com/yourusername/NoiseScope)
-[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/yourusername/NoiseScope)
+[![Project Status](https://img.shields.io/badge/Status-In%20Development-blue)](https://github.com/Varun987-a11/NoiseScope)
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/Varun987-a11/NoiseScope)
 
 ## 💡 Project Overview
 
