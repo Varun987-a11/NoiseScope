@@ -31,7 +31,7 @@ You only need a modern web browser (Chrome, Firefox, Edge, Safari) to view the f
 
 1.  **Clone the repository:**
     ```bash
-    git clone [https://github.com/yourusername/NoiseScope.git](https://github.com/yourusername/NoiseScope.git)
+    git clone [https://github.com/Varun987-a11/NoiseScope.git](https://github.com/Varun987-a11/NoiseScope.git)
     cd NoiseScope
     ```
 
