@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NoiseScope - Access Portal</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        header {
+            background-color: #1a1a2e;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            border-bottom: 5px solid #007bff;
+        }
+        .header-logo {
+            width: 120px; /* Larger logo size */
+            height: 120px;
+            display: block;
+            margin: 0 auto 15px;
+            border-radius: 18px;
+            box-shadow: 0 0 20px rgba(100, 50, 255, 0.8);
+        }
+
+        .choice-container {
+            max-width: 600px;
+            margin: 100px auto;
+            padding: 40px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .choice-container h2 { margin-bottom: 30px; color: #007bff; }
+        .choice-buttons a {
+            display: inline-block;
+            width: 45%;
+            padding: 20px;
+            margin: 10px;
+            text-decoration: none;
+            font-size: 1.2em;
+            border-radius: 6px;
+            transition: background-color 0.3s;
+        }
+        .admin-btn { background-color: #dc3545; color: white; }
+        .user-btn { background-color: #28a745; color: white; }
+        .admin-btn:hover { background-color: #c82333; }
+        .user-btn:hover { background-color: #1e7e34; }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="image.png" alt="NoiseScope Logo" class="header-logo">
+        <h1>NoiseScope</h1>
+        <p>A Crowdsourced System For Ambient Noise Mapping</p>
+    </header>
+
+    <div class="choice-container">
+        <h2>Who are you?</h2>
+        <div class="choice-buttons">
+            <a href="admin_login.html" class="admin-btn">
+                ADMIN
+                <p style="font-size: 0.7em; margin-top: 5px;">(Dashboard & Management)</p>
+            </a>
+            <a href="user_login.html" class="user-btn">
+                USER / CONTRIBUTOR
+                <p style="font-size: 0.7em; margin-top: 5px;">(Submit Noise Data)</p>
+            </a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NoiseScope - User Registration</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Shared styling for the login/register card */
+        .login-container { max-width: 400px; margin: 100px auto; padding: 30px; background: white; border-radius: 8px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); text-align: center; }
+        .login-container h2 { margin-bottom: 20px; color: #28a745; }
+        .login-container input { margin-bottom: 15px; }
+        .login-container button { width: 100%; }
+        .back-link { position: absolute; top: 20px; left: 20px; text-decoration: none; color: #007bff; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>User Registration 📝</h1>
+        <a href="user_login.html" class="back-link">← Back to Login</a>
+    </header>
+
+    <div class="login-container">
+        <h2>Create Contributor Account</h2>
+        <form id="registerForm">
+            <input type="text" id="username" placeholder="Choose Username" required>
+            <input type="password" id="password" placeholder="Choose Password (min 6 chars)" required minlength="6">
+            <button type="submit" id="registerButton">Register</button>
+            <p id="registerMessage" style="color: red; margin-top: 10px;"></p>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('registerForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const registerButton = document.getElementById('registerButton');
+            const registerMessage = document.getElementById('registerMessage');
+            
+            registerButton.disabled = true;
+            registerButton.textContent = 'Processing...';
+            registerMessage.textContent = '';
+
+            try {
+                const response = await fetch('backend/register.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, password })
+                });
+
+                const result = await response.json();
+
+                if (response.ok && result.status === 'success') {
+                    registerMessage.style.color = 'green';
+                    registerMessage.textContent = result.message + ' Redirecting to login...';
+                    // Redirect to login page after successful registration
+                    setTimeout(() => {
+                        window.location.href = 'user_login.html'; 
+                    }, 2000);
+                } else {
+                    registerMessage.style.color = 'red';
+                    registerMessage.textContent = result.message || 'Registration failed.';
+                }
+            } catch (error) {
+                registerMessage.style.color = 'red';
+                registerMessage.textContent = 'Network error. Check server connection.';
+            } finally {
+                registerButton.disabled = false;
+                registerButton.textContent = 'Register';
+            }
+        });
+    </script>
+</body>
+</html>

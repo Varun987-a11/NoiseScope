@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contributor Login - NoiseScope</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            background-color: #f4f7f6; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            min-height: 100vh; 
+            margin: 0; 
+        }
+        .header {
+            width: 100%;
+            max-width: 400px;
+            text-align: left;
+            margin-bottom: 20px;
+            position: absolute;
+            top: 20px;
+        }
+        .back-link {
+            color: #007bff;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        .login-container { 
+            background-color: #ffffff; 
+            padding: 30px; 
+            border-radius: 8px; 
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
+            width: 100%; 
+            max-width: 400px; 
+            box-sizing: border-box;
+            text-align: center;
+        }
+        h2 { 
+            color: #28a745; 
+            margin-top: 0;
+            margin-bottom: 25px;
+        }
+        input[type="text"], input[type="password"] { 
+            width: 100%; 
+            padding: 10px; 
+            margin-bottom: 15px; 
+            border: 1px solid #ccc; 
+            border-radius: 4px; 
+            box-sizing: border-box; 
+        }
+        button, .button-link { 
+            width: 100%; 
+            padding: 12px; 
+            background-color: #007bff;
+            color: white; 
+            border: none; 
+            border-radius: 4px; 
+            cursor: pointer; 
+            font-size: 16px; 
+            transition: background-color 0.3s; 
+            text-decoration: none;
+            display: block; /* Make the link button behave like a block element */
+            text-align: center;
+            box-sizing: border-box;
+        }
+        button:hover, .button-link:hover { 
+            background-color: #0056b3; 
+        }
+        #loginButton {
+            background-color: #28a745;
+            margin-bottom: 20px;
+        }
+        #loginButton:hover {
+            background-color: #1e7e34;
+        }
+        .guest-link p {
+            margin: 20px 0 10px 0;
+            color: #555;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="index.html" class="back-link">← Change Role / Back to Home</a>
+    </div>
+
+    <div class="login-container">
+        <h2>User / Contributor Login</h2>
+        
+        <form id="loginForm">
+            <input type="text" id="username" placeholder="Username" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <button type="submit" id="loginButton">Log In</button>
+            <p id="loginMessage" style="color: red; margin-top: 10px;"></p>
+        </form>
+        
+        <div class="guest-link">
+            <p>Don't have an account?</p>
+            <a href="user_register.html" class="button-link">Register Now</a>
+        </div>
+
+        <div class="guest-link">
+            <p>Or submit data without logging in:</p>
+            <a href="user_submit.php?mode=anonymous" class="button-link">Submit as Guest</a>
+        </div>
+    </div>
+
+    <script src="js/login_handler.js"></script>
+    <script>
+        // Calls the general handler with 'user' type
+        document.getElementById('loginForm').addEventListener('submit', (e) => {
+            handleLogin(e, 'user');
+        });
+    </script>
+</body>
+</html>
