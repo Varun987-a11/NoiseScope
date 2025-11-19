@@ -19,48 +19,259 @@ if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== TRUE) {
     <title>Admin Dashboard - NoiseScope</title>
     
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
-    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <style>
-        body { font-family: Arial, sans-serif; margin: 0; background-color: #f4f7f6; }
-        .header { background-color: #28a745; color: white; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; }
-        .header h1 { margin: 0; font-size: 24px; }
-        .header div { display: flex; align-items: center; }
-        .header span { margin-right: 15px; }
-        .header a { color: white; text-decoration: none; padding: 8px 15px; border: 1px solid white; border-radius: 4px; transition: background-color 0.3s; }
-        .header a:hover { background-color: #1e7e34; }
-        .content { padding: 20px; max-width: 1400px; margin: auto; }
+        :root {
+            /* Dark Theme Colors */
+            --primary-color: #a78bfa; /* Light Indigo for accents */
+            --primary-hover: #8b5cf6;
+            --accent-color: #34d399; /* Emerald for highlights */
+            --danger-color: #f87171; /* Red */
+            --bg-dark: #111827; /* Deep Charcoal Background */
+            --card-dark: #1f2937; /* Slightly lighter card background */
+            --text-light: #f3f4f6; /* Near White Text */
+            --text-muted: #9ca3af; /* Gray Text */
+            --card-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.15);
+            --input-border: #4b5563;
+            --radius: 10px; /* Slightly reduced radius */
+        }
+
+        * { box-sizing: border-box; }
+
+        body { 
+            font-family: 'Poppins', sans-serif; 
+            margin: 0; 
+            background-color: var(--bg-dark); 
+            color: var(--text-light); 
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            font-size: 13.5px; /* Reduced base font size */
+        }
+
+        /* Compact Dark Header */
+        .header { 
+            background: rgba(31, 41, 55, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 0.7rem 2rem; /* Reduced padding */
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            box-shadow: 0 1px 5px rgba(0,0,0,0.4);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            height: 55px; /* Reduced header height */
+        }
+
+        .logo-group h1 { 
+            margin: 0; 
+            font-size: 1.25rem; /* Reduced font size */
+            font-weight: 700;
+            background: linear-gradient(to right, var(--primary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .header-controls { 
+            display: flex; 
+            align-items: center; 
+            gap: 1rem; /* Reduced gap */
+        }
+
+        .header-controls span { 
+            font-size: 0.85rem; /* Reduced font size */
+            color: var(--text-muted); 
+        }
         
-        /* Tab Styles */
-        .tabs { display: flex; margin-bottom: 20px; border-bottom: 2px solid #ccc; }
-        .tab-button { background-color: #f1f1f1; border: none; padding: 10px 20px; cursor: pointer; transition: background-color 0.3s; margin-right: 5px; border-radius: 5px 5px 0 0; }
-        .tab-button:hover { background-color: #ddd; }
-        .tab-button.active { background-color: #fff; border-top: 2px solid #28a745; border-left: 1px solid #ccc; border-right: 1px solid #ccc; border-bottom: none; }
-        .tab-content { background-color: white; padding: 20px; border-radius: 0 0 8px 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); }
-        .tab-pane { display: none; }
+        .header-controls strong {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .nav-btn { 
+            text-decoration: none; 
+            padding: 0.3rem 1rem; /* Reduced padding */
+            border-radius: 50px; 
+            font-size: 0.8rem; /* Reduced font size */
+            font-weight: 500; 
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+            border: 1px solid var(--danger-color);
+            color: var(--danger-color);
+            background: transparent;
+        }
+
+        .nav-btn:hover {
+            background: var(--danger-color);
+            color: var(--bg-dark); 
+            box-shadow: 0 0 15px rgba(248, 113, 113, 0.5);
+        }
+
+        /* Main Content - CRITICAL WIDTH REDUCTION */
+        .content { 
+            padding: 1.5rem; /* Reduced padding */
+            max-width: 1200px; /* Reduced max width for laptop screens */
+            margin: 0 auto; 
+            width: 100%;
+            flex-grow: 1;
+        }
+
+        /* Modern Tabs */
+        .tabs { 
+            display: flex; 
+            margin-bottom: 1rem; /* Reduced margin */
+            gap: 0.5rem; /* Reduced gap */
+            flex-wrap: wrap;
+        }
+
+        .tab-button { 
+            background-color: var(--card-dark); 
+            border: 1px solid var(--input-border); 
+            padding: 0.5rem 1rem; /* Reduced padding */
+            cursor: pointer; 
+            transition: all 0.3s ease; 
+            border-radius: 50px;
+            font-family: inherit;
+            font-weight: 500;
+            color: var(--text-muted);
+            font-size: 0.85rem; /* Reduced font size */
+        }
+
+        .tab-button:hover { 
+            background-color: #2e3e50; 
+            color: var(--text-light);
+            border-color: var(--primary-color);
+        }
+
+        .tab-button.active { 
+            background-color: var(--primary-color); 
+            color: var(--bg-dark); 
+            box-shadow: 0 4px 10px rgba(167, 139, 250, 0.3);
+            border-color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        /* Card Container for Tab Content */
+        .tab-content { 
+            background-color: var(--card-dark); 
+            padding: 0; 
+            border-radius: var(--radius); 
+            box-shadow: var(--card-shadow); 
+            border: 1px solid rgba(255,255,255,0.05);
+            min-height: 350px; /* Reduced min height */
+            overflow: hidden;
+        }
+
+        .tab-pane { 
+            display: none; 
+            padding: 1.5rem; /* Reduced padding */
+            animation: fadeIn 0.3s ease;
+        }
+        
         .tab-pane.active { display: block; }
 
-        /* Map and Table Styles */
-        #map { height: 600px; width: 100%; border-radius: 8px; margin-bottom: 20px; }
-        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
-        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; font-size: 14px; }
-        th { background-color: #f2f2f2; }
-        .delete-btn { background-color: #dc3545; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px; }
-        .delete-btn:hover { background-color: #c82333; }
+        h2 {
+            margin-top: 0;
+            color: var(--text-light);
+            font-size: 1.3rem; /* Reduced font size */
+            margin-bottom: 0.4rem;
+        }
 
-        /* Modal Styles */
-        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.4); }
-        .modal-content { background-color: #fefefe; margin: 10% auto; padding: 20px; border: 1px solid #888; width: 80%; max-width: 800px; border-radius: 8px; position: relative; }
-        .close-btn { color: #aaa; float: right; font-size: 28px; font-weight: bold; cursor: pointer; }
-        .close-btn:hover, .close-btn:focus { color: #000; text-decoration: none; }
+        p {
+            color: var(--text-muted); 
+            margin-bottom: 1rem; /* Reduced margin */
+            font-size: 0.9rem;
+        }
+
+        /* Map - CRITICAL HEIGHT REDUCTION */
+        #map { 
+            height: 450px; /* Significantly reduced map height */
+            width: 100%; 
+            border-radius: 8px; 
+            box-shadow: inset 0 0 5px rgba(0,0,0,0.5); 
+            filter: grayscale(15%); 
+        }
+
+        /* Tables */
+        .table-wrapper {
+            overflow-x: auto;
+            border-radius: 6px;
+            border: 1px solid #374151;
+        }
+
+        table { 
+            width: 100%; 
+            border-collapse: collapse; 
+            white-space: nowrap;
+        }
+
+        th, td { 
+            padding: 0.75rem; /* Reduced table cell padding */
+            text-align: left; 
+            font-size: 0.85rem; /* Reduced font size */
+            border-bottom: 1px solid #374151;
+            color: var(--text-light);
+        }
+        
+        td { color: var(--text-light); }
+
+        th { 
+            background-color: #2d3748; 
+            color: var(--text-light);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.7rem; /* Reduced font size */
+            letter-spacing: 0.05em;
+        }
+
+        tr:last-child td { border-bottom: none; }
+        tr:hover td { background-color: #28303f; }
+
+        /* Delete Button */
+        .delete-btn { 
+            padding: 0.3rem 0.6rem; /* Reduced padding */
+            font-size: 0.75rem; /* Reduced font size */
+        }
+
+        /* Status Text */
+        #submissionsStatus, #usersStatus {
+            font-size: 0.85rem;
+        }
+
+        /* Modal */
+        .modal-content { 
+            margin: 3% auto; /* Move modal up slightly */
+            padding: 1.5rem; /* Reduced padding */
+        }
+        
+        /* Chart.js adjustments for dark theme background */
+        #noiseChart {
+            background-color: #2d3748; 
+            padding: 10px;
+            border-radius: 8px;
+        }
+        
+        /* Mobile Adjustments (Kept as before, but overall design is now better for tablets/laptops) */
+        @media (max-width: 768px) {
+            .header { padding: 0.5rem 1rem; }
+            .content { padding: 1rem; }
+            .tabs { flex-direction: column; }
+            .tab-button { width: 100%; border-radius: 8px; }
+            #map { height: 350px; }
+        }
     </style>
 </head>
 <body>
     <div class="header">
-        <h1>NoiseScope Admin Dashboard</h1>
-        <div>
-            <span>Welcome, **<?php echo htmlspecialchars($_SESSION['username']); ?>**!</span>
-            <a href="backend/logout.php">Log Out</a>
+        <div class="logo-group">
+            <h1>NoiseScope Admin ⚙️</h1>
+        </div>
+        <div class="header-controls">
+            <span>Welcome, <strong><?php echo htmlspecialchars($_SESSION['username']); ?></strong>!</span>
+            <a href="backend/logout.php" class="nav-btn">Log Out</a>
         </div>
     </div>
 
@@ -79,40 +290,45 @@ if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== TRUE) {
             </div>
 
             <div id="Submissions" class="tab-pane">
-                <h2>Submissions Database Table</h2>
+                <h2>Submissions Database</h2>
                 <p id="submissionsStatus">Loading data...</p>
-                <table id="submissionsTable">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Location Name</th>
-                            <th>Lat, Lng</th>
-                            <th>dB Level</th>
-                            <th>Type</th>
-                            <th>Timestamp</th>
-                            <th>Submitter</th> <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+                <div class="table-wrapper">
+                    <table id="submissionsTable">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Location Name</th>
+                                <th>Lat, Lng</th>
+                                <th>dB Level</th>
+                                <th>Type</th>
+                                <th>Timestamp</th>
+                                <th>Submitter</th> 
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
                         </tbody>
-                </table>
+                    </table>
+                </div>
             </div>
 
             <div id="Users" class="tab-pane">
                 <h2>Registered Users</h2>
                 <p id="usersStatus">Loading user list...</p>
-                <table id="usersTable">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Username</th>
-                            <th>Admin Status</th>
-                            <th>Registered On</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+                <div class="table-wrapper">
+                    <table id="usersTable">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Username</th>
+                                <th>Admin Status</th>
+                                <th>Registered On</th>
+                            </tr>
+                        </thead>
+                        <tbody>
                         </tbody>
-                </table>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
@@ -122,13 +338,11 @@ if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== TRUE) {
             <span class="close-btn" onclick="closeModal()">&times;</span>
             <h3 id="graphTitle">Noise Level History</h3>
             <canvas id="noiseChart"></canvas>
-            <p style="margin-top: 15px;">*Note: This graph shows the time history of all collected noise averages at this specific location.</p>
+            <p style="margin-top: 10px; font-size: 0.8rem; font-style: italic; color: var(--text-muted);">*Note: This graph shows the time history of all collected noise averages at this specific location.</p>
         </div>
     </div>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    
-   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     
     <script>
         // --- Dashboard Initialization and Global State ---
@@ -372,7 +586,7 @@ if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== TRUE) {
                 if (historicalData.length === 0) { alert('No historical data found for this location.'); closeModal(); return; }
 
                 const labels = historicalData.map(d => new Date(d.timestamp).toLocaleTimeString());
-                const noiseLevels = historicalData.map(d => d.avg_noise_level_db);
+                const noiseLevels = historicalData.map(d => point.avg_noise_level_db); 
 
                 renderChart(labels, noiseLevels);
             } catch (error) { console.error('Failed to process historical data:', error); alert('Failed to load historical data for graphing.'); }
@@ -393,13 +607,28 @@ if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== TRUE) {
                     datasets: [{
                         label: 'Average Noise Level (dB)',
                         data: data,
-                        borderColor: '#4CAF50',
-                        backgroundColor: 'rgba(76, 175, 80, 0.15)',
+                        borderColor: 'var(--primary-color)', 
+                        backgroundColor: 'rgba(167, 139, 250, 0.1)', 
                         borderWidth: 2,
-                        tension: 0.2
+                        tension: 0.3, 
+                        pointBackgroundColor: 'var(--card-dark)', 
+                        pointBorderColor: 'var(--primary-color)'
                     }]
                 },
-                options: { responsive: true, scales: { y: { beginAtZero: false }, x: {} } }
+                options: { 
+                    responsive: true, 
+                    scales: { 
+                        y: { 
+                            beginAtZero: false,
+                            grid: { color: '#374151' }, 
+                            ticks: { color: 'var(--text-muted)', font: { size: 11 } }, /* Smaller font */
+                        }, 
+                        x: {
+                            grid: { color: '#374151' },
+                            ticks: { color: 'var(--text-muted)', font: { size: 11 } }, /* Smaller font */
+                        } 
+                    } 
+                }
             });
         }
     </script>
