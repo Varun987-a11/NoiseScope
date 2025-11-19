@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* Define Color Variables - Sky Blue Palette */
+        :root {
+            --color-primary-sky: #6495ed; /* Cornflower Blue - Main Sky Accent */
+            --color-primary-dark: #1e90ff; /* Dodger Blue - Darker Accent for Text/Icons */
+            --color-text-dark: #344055;
+            --color-background-white: #ffffff;
+            --color-box-bg: #f0f8ff; /* Alice Blue - Very Light Blue Box Background */
+            --color-arrow: #87ceeb; /* Sky Blue - for arrows */
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            margin: 0;
+            background-color: #e6f0ff; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .slide-container {
+            width: 90%;
+            max-width: 1400px;
+            height: 600px;
+            background-color: var(--color-background-white);
+            border-radius: 12px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .slide-title {
+            font-family: 'Poppins', sans-serif;
+            color: var(--color-primary-dark);
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 50px;
+        }
+
+        /* Main Architecture Flow */
+        .architecture-flow {
+            display: flex;
+            align-items: center; /* Changed to center to align arrows vertically */
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        /* Stage Boxes */
+        .stage {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            width: 22%; /* Slightly wider to accommodate arrow fix */
+            position: relative;
+        }
+        
+        .stage-icon-box {
+            width: 100%;
+            padding: 20px 10px; /* Reduced side padding slightly */
+            border-radius: 10px;
+            background-color: var(--color-box-bg);
+            border: 2px solid var(--color-primary-sky);
+            margin-bottom: 0; /* Removed margin-bottom here */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .stage-icon {
+            font-size: 60px;
+            color: var(--color-primary-dark);
+            margin-bottom: 15px;
+        }
+
+        /* Text Content */
+        .stage h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 22px;
+            color: var(--color-primary-dark);
+            margin: 0 0 10px 0;
+            font-weight: 600;
+        }
+
+        .stage ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            text-align: center;
+        }
+        
+        .stage li {
+            font-size: 16px;
+            color: var(--color-text-dark);
+            line-height: 1.4;
+            margin-bottom: 5px;
+        }
+        
+        /* Flow Arrows (connecting the stages) */
+        .flow-connector {
+            /* This width is key to the spacing */
+            width: 11%; 
+            height: 50px; /* Define height to vertically align arrow */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 10px; /* Push arrow down slightly to center it in the flow */
+        }
+
+        .arrow {
+            width: 100%;
+            height: 15px; /* Thinner arrow bar */
+            background-color: var(--color-arrow);
+            border-radius: 3px;
+            position: relative;
+        }
+
+        /* Arrowhead */
+        .arrow::after {
+            content: '';
+            position: absolute;
+            right: -10px; /* Smaller offset */
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 7.5px 0 7.5px 10px; /* Smaller arrowhead */
+            border-color: transparent transparent transparent var(--color-arrow);
+        }
+    </style>
+</head>
+<body>
+
+<div class="slide-container">
+    
+    <h2 class="slide-title"> </h2>
+
+    <div class="architecture-flow">
+        
+        <div class="stage">
+            <div class="stage-icon-box">
+                <i class="fa-solid fa-mobile-screen-button stage-icon"></i>
+                <h3>Frontend (Capture)</h3>
+                <ul>
+                    <li><strong>Web Audio API</strong> (dB Calculation)</li>
+                    <li><strong>Geolocation API</strong> (Lat/Lng)</li>
+                    <li>HTML/CSS/JS</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="flow-connector">
+            <div class="arrow"></div>
+        </div>
+
+        <div class="stage">
+            <div class="stage-icon-box">
+                <i class="fa-solid fa-server stage-icon"></i>
+                <h3>Backend (Process)</h3>
+                <ul>
+                    <li><strong>PHP</strong> (API Endpoints)</li>
+                    <li>Input Validation</li>
+                    <li>Session Management</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="flow-connector">
+            <div class="arrow"></div>
+        </div>
+
+        <div class="stage">
+            <div class="stage-icon-box">
+                <i class="fa-solid fa-database stage-icon"></i>
+                <h3>Database (Store)</h3>
+                <ul>
+                    <li><strong>MySQL</strong></li>
+                    <li>Noise Data Table</li>
+                    <li>User Registration</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="flow-connector">
+            <div class="arrow"></div>
+        </div>
+
+        <div class="stage">
+            <div class="stage-icon-box">
+                <i class="fa-solid fa-display stage-icon"></i>
+                <h3>Dashboard (Visualize)</h3>
+                <ul>
+                    <li><strong>Leaflet.js</strong> (Map)</li>
+                    <li><strong>Chart.js</strong> (Trends)</li>
+                    <li>Admin Interface</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

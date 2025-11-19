@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NoiseScope - Access Portal</title>
+    <!-- Google Fonts: Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* Dark Theme Palette */
+            --primary-color: #818cf8; /* Light Indigo */
+            --accent-color: #34d399;  /* Light Emerald */
+            --danger-color: #f87171;  /* Light Red */
+            
+            --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%); /* Deep Dark Background */
+            
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            
+            /* Dark Glass Variables */
+            --glass-bg: rgba(15, 23, 42, 0.6);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+            
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --card-hover-bg: rgba(255, 255, 255, 0.08);
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center; /* Center vertically */
+            background: var(--bg-gradient);
+            color: var(--text-main);
+            overflow-x: hidden;
+        }
+
+        /* --- Header Section --- */
+        header {
+            width: 100%;
+            text-align: center;
+            padding-bottom: 1.5rem;
+            animation: fadeInDown 0.8s ease-out;
+        }
+        
+        .header-logo {
+            display: block;
+            margin: 0 auto 1rem;
+            width: 80px; /* Reduced Size */
+            height: 80px; /* Reduced Size */
+            border-radius: 50%;
+            background-color: white;
+            object-fit: cover;
+            box-shadow: 0 0 20px rgba(99, 102, 241, 0.4); /* Glow effect */
+            border: 2px solid rgba(255,255,255,0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .header-logo:hover {
+            transform: scale(1.05) rotate(5deg);
+        }
+
+        header h1 {
+            font-size: 2rem; /* Reduced Size */
+            margin: 0;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            background: linear-gradient(to right, var(--primary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        header p {
+            font-size: 0.95rem; /* Reduced Size */
+            color: var(--text-muted);
+            margin-top: 0.5rem;
+            font-weight: 400;
+            opacity: 0.8;
+        }
+
+        /* --- Main Container --- */
+        .choice-container {
+            width: 90%;
+            max-width: 600px; /* Reduced Max Width */
+            padding: 2rem;    /* Reduced Padding */
+            
+            /* Dark Glass Effect */
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-radius: 16px;
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow);
+            
+            text-align: center;
+            animation: fadeInUp 0.8s ease-out 0.2s backwards;
+        }
+        
+        .choice-container h2 { 
+            margin-top: 0;
+            margin-bottom: 1.5rem; 
+            color: var(--text-main); 
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+
+        /* --- Buttons Layout --- */
+        .choice-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .role-card {
+            flex: 1; 
+            min-width: 200px; 
+            padding: 1.5rem 1rem; /* Compact Padding */
+            text-decoration: none;
+            border-radius: 12px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid var(--glass-border);
+            position: relative;
+            overflow: hidden;
+            background: var(--card-bg);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Hover State */
+        .role-card:hover {
+            transform: translateY(-3px);
+            background: var(--card-hover-bg);
+            box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.3);
+        }
+
+        /* --- Button Themes --- */
+        .role-card .icon { 
+            font-size: 2rem; /* Smaller Icons */
+            margin-bottom: 0.8rem; 
+            display: block; 
+            filter: drop-shadow(0 0 8px rgba(255,255,255,0.2));
+        }
+        
+        .role-card h3 { 
+            margin: 0; 
+            font-size: 1rem; 
+            font-weight: 600; 
+            letter-spacing: 0.5px;
+        }
+        
+        .role-card p { 
+            color: var(--text-muted); 
+            margin: 0.4rem 0 0; 
+            font-size: 0.8rem; 
+        }
+
+        /* Admin Specifics */
+        .admin-btn:hover { border-color: var(--danger-color); }
+        .admin-btn h3 { color: var(--danger-color); }
+
+        /* User Specifics */
+        .user-btn:hover { border-color: var(--primary-color); }
+        .user-btn h3 { color: var(--primary-color); }
+
+        /* --- Animations --- */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- Mobile Adjustments --- */
+        @media (max-width: 600px) {
+            header { margin-top: 2rem; }
+            
+            .choice-container {
+                width: 95%;
+                padding: 1.5rem;
+            }
+            
+            .role-card {
+                min-width: 100%; 
+                flex-direction: row; 
+                justify-content: flex-start;
+                text-align: left;
+                padding: 1rem;
+                gap: 1rem;
+            }
+            
+            .role-card .icon {
+                margin-bottom: 0;
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <img src="image.png" alt="NoiseScope Logo" class="header-logo">
+        <h1>NoiseScope</h1>
+        <p>Crowdsourced Ambient Noise Mapping</p>
+    </header>
+
+    <div class="choice-container">
+        <h2>Select Your Role</h2>
+        
+        <div class="choice-buttons">
+            
+            <!-- Admin Button -->
+            <a href="admin_login.html" class="role-card admin-btn">
+                <span class="icon">🛡️</span>
+                <div>
+                    <h3>Admin</h3>
+                    <p>Dashboard & Management</p>
+                </div>
+            </a>
+
+            <!-- User Button -->
+            <a href="user_login.html" class="role-card user-btn">
+                <span class="icon">🎙️</span>
+                <div>
+                    <h3>Contributor</h3>
+                    <p>Submit Data & View Map</p>
+                </div>
+            </a>
+
+        </div>
+    </div>
+
+</body>
+</html>

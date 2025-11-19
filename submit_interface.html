@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NoiseScope - Submission Interface</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>NoiseScope Data Submission 🎙️</h1>
+        <a href="index.html" class="back-link">← Admin/Login</a>
+    </header>
+
+    <div class="container">
+        <section class="card" id="submission-form">
+            <h2>1. Measure and Submit Data</h2>
+            <form id="noiseForm">
+                <label for="locationName">Location Name:</label>
+                <input type="text" id="locationName" required placeholder="e.g., Library, Bus Stop, Park">
+
+                <div class="measurement-area">
+                    <button type="button" id="startMeasureButton">
+                        Start Noise Measurement (5s)
+                    </button>
+                    <div id="statusMessage">
+                        Click on the map below to select your submission location!
+                    </div>
+                </div>
+
+                <div class="result-area">
+                    <label>Calculated Avg dB:</label>
+                    <span id="dBDisplay">--</span> dB
+                    
+                    <div class="selected-coords">
+                        Selected Location: <span id="coordsDisplay">No Point Selected</span>
+                    </div>
+
+                    <input type="hidden" id="avgNoiseLevel" name="avg_noise_level_db" required>
+                    <input type="hidden" id="latitude" name="latitude" required>
+                    <input type="hidden" id="longitude" name="longitude" required>
+                </div>
+                
+                <button type="submit" id="submitButton" disabled>
+                    Submit Noise Data
+                </button>
+            </form>
+        </section>
+
+        <section class="card" id="map-selection">
+            <h2>2. Select Location</h2>
+            <div class="visualization-area">
+                <div id="map"></div>
+            </div>
+        </section>
+    </div>
+
+    <script src="submit.js"></script> 
+</body>
+</html>

@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contributor Login - NoiseScope</title>
+    <!-- Google Fonts: Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* Dark Theme Palette */
+            --primary-color: #818cf8; /* Light Indigo */
+            --primary-hover: #6366f1;
+            --accent-color: #34d399;  /* Emerald for Guest */
+            --accent-hover: #10b981;
+            --danger-color: #f87171;
+            
+            --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+            
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            
+            /* Glass Variables */
+            --glass-bg: rgba(15, 23, 42, 0.6);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+            
+            --input-bg: rgba(255, 255, 255, 0.03);
+            --input-border: rgba(255, 255, 255, 0.1);
+        }
+
+        * { box-sizing: border-box; }
+
+        body { 
+            font-family: 'Poppins', sans-serif; 
+            background: var(--bg-gradient); 
+            color: var(--text-main);
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center;
+            min-height: 100vh; 
+            margin: 0; 
+            overflow-x: hidden;
+            padding: 1rem;
+            font-size: 14px; /* Base font size reduction */
+        }
+
+        /* --- Navbar/Back Link --- */
+        .navbar {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            z-index: 10;
+        }
+        
+        .navbar a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.8rem;
+            padding: 6px 12px;
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .navbar a:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-main);
+            transform: translateX(-3px);
+        }
+
+        /* --- Login Card --- */
+        .login-container { 
+            width: 100%; 
+            max-width: 360px; /* Much narrower width */
+            padding: 1.8rem;  /* Reduced padding */
+            
+            /* Glassmorphism */
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-radius: 12px;
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow);
+            
+            text-align: center;
+            animation: fadeInUp 0.6s ease-out;
+            margin-top: 30px;
+        }
+
+        h2 { 
+            color: var(--text-main); 
+            margin-top: 0;
+            margin-bottom: 1.2rem; 
+            font-weight: 600;
+            font-size: 1.3rem; /* Smaller title */
+        }
+        
+        h2 span {
+            color: var(--primary-color);
+        }
+
+        .form-group { 
+            text-align: left;
+            margin-bottom: 1rem; 
+        }
+        
+        label { 
+            display: block; 
+            margin-bottom: 0.3rem; 
+            font-weight: 500; 
+            font-size: 0.85rem;
+            color: var(--text-muted); 
+        }
+        
+        input[type="text"], input[type="password"] { 
+            width: 100%; 
+            padding: 0.7rem 0.9rem; /* Compact input padding */
+            background: var(--input-bg);
+            border: 1px solid var(--input-border);
+            color: var(--text-main);
+            border-radius: 6px; 
+            font-size: 0.9rem;
+            font-family: inherit;
+            transition: all 0.2s ease;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            background: rgba(255, 255, 255, 0.05);
+            box-shadow: 0 0 0 3px rgba(129, 140, 248, 0.1);
+        }
+
+        /* --- Buttons --- */
+        button, .button-link { 
+            width: 100%; 
+            padding: 0.7rem; /* Smaller buttons */
+            border: none; 
+            border-radius: 6px; 
+            cursor: pointer; 
+            font-size: 0.9rem; 
+            font-weight: 500;
+            font-family: inherit;
+            text-decoration: none;
+            display: block;
+            transition: all 0.2s ease;
+            margin-bottom: 0.8rem;
+        }
+
+        /* Primary Login Button */
+        #loginButton {
+            background: var(--primary-color);
+            color: white;
+            box-shadow: 0 2px 8px rgba(129, 140, 248, 0.3);
+            margin-top: 0.5rem;
+        }
+        #loginButton:hover { 
+            background: var(--primary-hover); 
+            transform: translateY(-1px);
+        }
+
+        /* Secondary Sections */
+        .separator {
+            border-top: 1px solid var(--glass-border);
+            margin: 1.2rem 0;
+            position: relative;
+        }
+        
+        .separator span {
+            position: absolute;
+            top: -9px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #151d36; /* Match approx bg color */
+            padding: 0 8px;
+            color: var(--text-muted);
+            font-size: 0.75rem;
+        }
+
+        .guest-section p {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Register Button (Outline) */
+        .btn-register {
+            background: transparent;
+            border: 1px solid var(--glass-border);
+            color: var(--text-main);
+            padding: 0.6rem;
+        }
+        .btn-register:hover {
+            background: rgba(255,255,255,0.05);
+            border-color: var(--text-muted);
+        }
+
+        /* Guest Button (Emerald) */
+        .btn-guest {
+            background: var(--accent-color);
+            color: #064e3b; 
+            box-shadow: 0 2px 8px rgba(52, 211, 153, 0.2);
+            padding: 0.6rem;
+        }
+        .btn-guest:hover {
+            background: var(--accent-hover);
+            transform: translateY(-1px);
+        }
+
+        #loginMessage {
+            min-height: 1.2em;
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="index.html">
+            <span>←</span> Back to Home
+        </a>
+    </nav>
+
+    <div class="login-container">
+        <h2>Contributor <span>Login</span></h2>
+        
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" placeholder="Enter your username" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="Enter your password" required>
+            </div>
+            
+            <button type="submit" id="loginButton">Log In</button>
+            <p id="loginMessage"></p>
+        </form>
+        
+        <div class="separator"></div>
+
+        <div class="guest-section">
+            <p>New here?</p>
+            <a href="user_register.html" class="button-link btn-register">Create Account</a>
+        </div>
+
+        <div class="separator" style="margin-top: 1.2rem;"><span>OR</span></div>
+
+        <div class="guest-section">
+            <p>Submit data without an account:</p>
+            <a href="user_submit.php?mode=anonymous" class="button-link btn-guest">Submit as Guest 🚀</a>
+        </div>
+    </div>
+
+    <script src="js/login_handler.js"></script>
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', (e) => {
+            const msg = document.getElementById('loginMessage');
+            
+            if (typeof handleLogin === 'function') {
+                 msg.style.color = '#94a3b8'; 
+                 msg.textContent = 'Verifying...';
+                 handleLogin(e, 'user');
+            } else {
+                e.preventDefault();
+                msg.style.color = '#f87171';
+                msg.textContent = 'Error: Login handler script missing.';
+            }
+        });
+    </script>
+</body>
+</html>
