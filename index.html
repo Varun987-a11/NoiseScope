@@ -4,201 +4,245 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NoiseScope - Access Portal</title>
-    <!-- Removed external style.css link for single-file mandate -->
+    <!-- Google Fonts: Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
     <style>
         :root {
-            /* Professional Color Palette */
-            --color-dark: #1a1a2e;
-            --color-primary: #2ecc71; /* Green for User/Success */
-            --color-secondary: #e74c3c; /* Red for Admin/Alert */
-            --color-accent: #3498db; /* Blue for contrast/info */
-            --color-background: #ecf0f1;
+            /* Dark Theme Palette */
+            --primary-color: #818cf8; /* Light Indigo */
+            --accent-color: #34d399;  /* Light Emerald */
+            --danger-color: #f87171;  /* Light Red */
+            
+            --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%); /* Deep Dark Background */
+            
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            
+            /* Dark Glass Variables */
+            --glass-bg: rgba(15, 23, 42, 0.6);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+            
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --card-hover-bg: rgba(255, 255, 255, 0.08);
         }
 
+        * { box-sizing: border-box; }
+
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
-            
-            /* --- Aesthetic Feature: Contextual Background Image --- */
-            /* Using a high-quality abstract visualization placeholder for 'Noise Reduction' */
-            background-image: url('http://googleusercontent.com/image_collection/image_retrieval/17017156582657206516');
-            background-size: cover;
-            background-attachment: fixed;
-            background-position: center;
-            background-repeat: no-repeat;
-            
-            /* Aesthetic Feature: Dark Overlay for Readability and Aesthetic Match */
-            background-color: rgba(0, 0, 0, 0.75); /* Deep dark overlay color */
-            background-blend-mode: overlay; /* Blends the dark color with the image */
-            transition: all 0.3s ease;
+            justify-content: center; /* Center vertically */
+            background: var(--bg-gradient);
+            color: var(--text-main);
+            overflow-x: hidden;
         }
 
-        /* --- Professional Header (Preserved Structure) --- */
+        /* --- Header Section --- */
         header {
             width: 100%;
-            background-color: var(--color-dark);
-            color: white;
-            padding: 40px 20px 20px; /* More padding top */
             text-align: center;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Aesthetic Feature: Deep Shadow */
+            padding-bottom: 1.5rem;
+            animation: fadeInDown 0.8s ease-out;
         }
         
         .header-logo {
-            /* Updated for image.png */
             display: block;
-            margin: 0 auto 15px;
-            width: 100px;
-            height: 100px;
-            border-radius: 50%; /* Makes the image circular */
-            box-shadow: 0 0 20px rgba(46, 204, 113, 0.5); /* Glowing effect */
-            background-color: white; /* Backdrop for non-transparent images */
-            object-fit: cover; /* Ensures image fills the circular space neatly */
+            margin: 0 auto 1rem;
+            width: 80px; /* Reduced Size */
+            height: 80px; /* Reduced Size */
+            border-radius: 50%;
+            background-color: white;
+            object-fit: cover;
+            box-shadow: 0 0 20px rgba(99, 102, 241, 0.4); /* Glow effect */
+            border: 2px solid rgba(255,255,255,0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .header-logo:hover {
+            transform: scale(1.05) rotate(5deg);
         }
 
         header h1 {
-            font-size: 2.5em;
-            margin: 0 0 5px 0;
+            font-size: 2rem; /* Reduced Size */
+            margin: 0;
             font-weight: 700;
-            color: var(--color-primary); /* Highlighted title */
-            letter-spacing: 2px;
+            letter-spacing: -0.5px;
+            background: linear-gradient(to right, var(--primary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         header p {
-            font-size: 1.1em;
+            font-size: 0.95rem; /* Reduced Size */
+            color: var(--text-muted);
+            margin-top: 0.5rem;
+            font-weight: 400;
             opacity: 0.8;
-            margin: 0;
         }
 
-        /* --- Choice Container (Responsive & Aesthetic) --- */
+        /* --- Main Container --- */
         .choice-container {
-            width: 90%; /* Responsive width */
-            max-width: 650px; /* Maximum desktop width */
-            margin: 50px auto 80px;
-            padding: 40px 30px;
-            background: rgba(255, 255, 255, 0.95); /* Slightly transparent white container */
-            border-radius: 12px;
-            /* Aesthetic Feature: A subtle upward glow to highlight the container */
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), 0 0 20px rgba(255, 255, 255, 0.3); 
+            width: 90%;
+            max-width: 600px; /* Reduced Max Width */
+            padding: 2rem;    /* Reduced Padding */
+            
+            /* Dark Glass Effect */
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-radius: 16px;
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow);
+            
             text-align: center;
-            border: 1px solid #ddd;
+            animation: fadeInUp 0.8s ease-out 0.2s backwards;
         }
         
         .choice-container h2 { 
-            margin-bottom: 30px; 
-            color: var(--color-dark); 
-            font-size: 1.8em;
-            font-weight: 600;
+            margin-top: 0;
+            margin-bottom: 1.5rem; 
+            color: var(--text-main); 
+            font-size: 1.2rem;
+            font-weight: 500;
         }
 
-        /* --- Responsive Button Layout --- */
+        /* --- Buttons Layout --- */
         .choice-buttons {
             display: flex;
-            gap: 20px; /* Space between buttons */
-            flex-wrap: wrap; /* Allows stacking on small screens */
+            gap: 1rem;
+            flex-wrap: wrap;
             justify-content: center;
         }
         
-        .choice-buttons a {
-            flex-grow: 1; 
-            min-width: 250px; 
-            padding: 25px 20px;
+        .role-card {
+            flex: 1; 
+            min-width: 200px; 
+            padding: 1.5rem 1rem; /* Compact Padding */
             text-decoration: none;
-            font-size: 1.2em;
-            font-weight: 700;
-            border-radius: 10px;
-            transition: all 0.3s ease; 
-            border: 2px solid transparent;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid var(--glass-border);
+            position: relative;
+            overflow: hidden;
+            background: var(--card-bg);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
 
-        /* --- Admin Button Styling (Distinct Color) --- */
-        .admin-btn { 
-            background: linear-gradient(135deg, var(--color-secondary), #c0392b); 
-            color: white; 
-        }
-        .admin-btn:hover { 
-            background: linear-gradient(135deg, #c0392b, #a92a1c);
-            transform: translateY(-3px) scale(1.02); 
-            box-shadow: 0 10px 20px rgba(231, 76, 60, 0.4); 
-            border-color: white;
+        /* Hover State */
+        .role-card:hover {
+            transform: translateY(-3px);
+            background: var(--card-hover-bg);
+            box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.3);
         }
 
-        /* --- User/Contributor Button Styling (Distinct Color) --- */
-        .user-btn { 
-            background: linear-gradient(135deg, var(--color-primary), #27ae60); 
-            color: white; 
+        /* --- Button Themes --- */
+        .role-card .icon { 
+            font-size: 2rem; /* Smaller Icons */
+            margin-bottom: 0.8rem; 
+            display: block; 
+            filter: drop-shadow(0 0 8px rgba(255,255,255,0.2));
         }
-        .user-btn:hover { 
-            background: linear-gradient(135deg, #27ae60, #209355); 
-            transform: translateY(-3px) scale(1.02); 
-            box-shadow: 0 10px 20px rgba(46, 204, 113, 0.4); 
-            border-color: white;
+        
+        .role-card h3 { 
+            margin: 0; 
+            font-size: 1rem; 
+            font-weight: 600; 
+            letter-spacing: 0.5px;
         }
-
-        /* Button content styles */
-        .choice-buttons a span {
-            display: block;
-            font-size: 2.5em; /* Icon size */
-            margin-bottom: 10px;
-        }
-        .choice-buttons a p {
-            font-size: 0.8em; 
-            margin: 5px 0 0 0;
-            font-weight: 400;
-            opacity: 0.9;
+        
+        .role-card p { 
+            color: var(--text-muted); 
+            margin: 0.4rem 0 0; 
+            font-size: 0.8rem; 
         }
 
-        /* Mobile Adjustments (Responsive Feature) */
+        /* Admin Specifics */
+        .admin-btn:hover { border-color: var(--danger-color); }
+        .admin-btn h3 { color: var(--danger-color); }
+
+        /* User Specifics */
+        .user-btn:hover { border-color: var(--primary-color); }
+        .user-btn h3 { color: var(--primary-color); }
+
+        /* --- Animations --- */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- Mobile Adjustments --- */
         @media (max-width: 600px) {
+            header { margin-top: 2rem; }
+            
             .choice-container {
-                margin: 30px 10px 50px;
-                padding: 20px;
+                width: 95%;
+                padding: 1.5rem;
             }
-            .choice-buttons {
-                flex-direction: column; /* Force stacking */
-                gap: 15px;
+            
+            .role-card {
+                min-width: 100%; 
+                flex-direction: row; 
+                justify-content: flex-start;
+                text-align: left;
+                padding: 1rem;
+                gap: 1rem;
             }
-            .choice-buttons a {
-                width: 100%;
-                min-width: unset;
-            }
-            header h1 {
-                font-size: 2em;
-            }
-            header {
-                padding: 30px 10px 15px;
+            
+            .role-card .icon {
+                margin-bottom: 0;
+                font-size: 1.8rem;
             }
         }
     </style>
 </head>
 <body>
+
     <header>
-        <!-- Logo now uses the external image.png file -->
         <img src="image.png" alt="NoiseScope Logo" class="header-logo">
         <h1>NoiseScope</h1>
-        <p>A Crowdsourced System For Ambient Noise Mapping</p>
+        <p>Crowdsourced Ambient Noise Mapping</p>
     </header>
 
     <div class="choice-container">
-        <h2>Select Your Role to Continue</h2>
+        <h2>Select Your Role</h2>
+        
         <div class="choice-buttons">
-            <a href="admin_login.html" class="admin-btn">
-                <!-- Emoji/Icon Feature: Using distinct emojis for quick recognition -->
-                <span>🔑</span>
-                ADMIN
-                <p>Dashboard & System Management</p>
+            
+            <!-- Admin Button -->
+            <a href="admin_login.html" class="role-card admin-btn">
+                <span class="icon">🛡️</span>
+                <div>
+                    <h3>Admin</h3>
+                    <p>Dashboard & Management</p>
+                </div>
             </a>
-            <a href="user_login.html" class="user-btn">
-                <span>👂</span>
-                USER / CONTRIBUTOR
-                <p>Submit Noise Data & View Map</p>
+
+            <!-- User Button -->
+            <a href="user_login.html" class="role-card user-btn">
+                <span class="icon">🎙️</span>
+                <div>
+                    <h3>Contributor</h3>
+                    <p>Submit Data & View Map</p>
+                </div>
             </a>
+
         </div>
     </div>
+
 </body>
 </html>
