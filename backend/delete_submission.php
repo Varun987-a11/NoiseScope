@@ -2,7 +2,7 @@
 // backend/delete_submission.php
 session_start();
 require 'db_connect.php'; 
-
+//used to delete submissions by admins
 header('Content-Type: application/json');
 
 if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== TRUE) {
