@@ -1,4 +1,4 @@
-<?php
+     <?php
 // Start the session to access stored login variables
 session_start();
 
@@ -634,3 +634,4 @@ if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== TRUE) {
     </script>
 </body>
 </html>
+
