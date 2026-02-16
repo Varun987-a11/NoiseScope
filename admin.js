@@ -1,4 +1,4 @@
-// admin.js (Visualization, Table, and Dashboard Logic)
+    // admin.js (Visualization, Table, and Dashboard Logic)
 
 let map;
 let noiseChart;
@@ -157,4 +157,5 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Auto-refresh the dashboard data every 30 seconds
     setInterval(loadDataAndVisualize, 30000); 
+
 });
