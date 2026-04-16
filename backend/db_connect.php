@@ -1,4 +1,4 @@
-<?php
+  <?php
 // db_connect.php
 // Loads configuration from external file (which is ignored in GitHub)
 

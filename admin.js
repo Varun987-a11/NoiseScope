@@ -1,4 +1,4 @@
-// admin.js (Visualization, Table, and Dashboard Logic)
+    // admin.js (Visualization, Table, and Dashboard Logic)
 
 let map;
 let noiseChart;
@@ -6,7 +6,7 @@ let noiseChart;
 // --- Map Initialization & Visualization ---
 function initializeMap() {
     map = L.map('map').setView([28.6139, 77.2090], 13);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {  
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
 }
@@ -157,4 +157,5 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Auto-refresh the dashboard data every 30 seconds
     setInterval(loadDataAndVisualize, 30000); 
+
 });

@@ -4,7 +4,7 @@
 [![Project Status](https://img.shields.io/badge/Status-In%20Development-blue)](https://github.com/Varun987-a11/NoiseScope)
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/Varun987-a11/NoiseScope)
 
-## 💡 Project Overview
+## 💡 Project Overview 
 
 **NoiseScope** is a Minimum Viable Product (MVP) for a crowdsourced system designed to collect, visualize, and analyze real-time ambient noise data. The goal is to create detailed, up-to-date noise maps of urban areas, helping city planners, researchers, and citizens understand and address noise pollution.
 
