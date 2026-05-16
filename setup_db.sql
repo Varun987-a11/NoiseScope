@@ -10,6 +10,8 @@ CREATE TABLE IF NOT EXISTS users (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+
+
 -- Table to store crowdsourced noise data (Structural Change: Added environment_type)
 CREATE TABLE IF NOT EXISTS noise_data (
     id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
