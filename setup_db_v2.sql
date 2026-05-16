@@ -1,4 +1,4 @@
-USE noisescope;
+USE noisescope;  
 
 -- Add new columns to existing noise_data table
 ALTER TABLE noise_data
