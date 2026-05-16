@@ -33,4 +33,4 @@ INSERT INTO users (username, password_hash, role) VALUES
 ('user1', '$2y$10$7/O8D5A0F5Z4Q8G9H0J1I2L3M4N5P6R7S8T9U0V1W2X3Y4Z5A6B7C', 'contributor')
 ON DUPLICATE KEY UPDATE password_hash=password_hash; 
 -- Default Admin: 'admin' / 'adminpass'
--- Default User: 'user1' / 'userpass'
+-- Default User: 'user1' / 'userpass' 
