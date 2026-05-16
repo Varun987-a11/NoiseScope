@@ -3,6 +3,16 @@ require 'db_connect.php'; // Reuse your database connection script
 
 header('Content-Type: application/json');
 
+
+// Block this endpoint unless the correct secret key is provided
+$ADMIN_SECRET = getenv('ADMIN_SECRET') ?: 'change-this-secret-locally';
+$provided_secret = isset($data['secret']) ? $data['secret'] : '';
+if ($provided_secret !== $ADMIN_SECRET) {
+    http_response_code(403);
+    echo json_encode(["status" => "error", "message" => "Forbidden."]);
+    exit();
+}
+
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405);
     echo json_encode(["status" => "error", "message" => "Method not allowed. Use POST."]);

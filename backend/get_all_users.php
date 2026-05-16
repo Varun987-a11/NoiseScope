@@ -1,4 +1,14 @@
+
+
+
 <?php
+
+session_start();
+if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== TRUE) {
+    http_response_code(403);
+    echo json_encode([]); exit();
+}
+
 // backend/get_all_users.php
 require 'db_connect.php'; 
 

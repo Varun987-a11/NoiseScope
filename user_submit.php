@@ -431,17 +431,56 @@ if ($is_logged_in && !$is_guest) {
                 </div>
                 
                 <div class="form-group">
-                    <label for="environmentType">Environment Type</label>
-                    <select id="environmentType" required onchange="checkFormReady()">
-                        <option value="">Select environment...</option>
-                        <option value="Residential (Quiet)">Residential (Quiet)</option>
-                        <option value="Residential (Traffic)">Residential (Traffic)</option>
-                        <option value="Commercial/Market">Commercial/Market</option>
-                        <option value="Indoor (e.g., classroom, office)">Indoor</option>
-                        <option value="Industrial Zone">Industrial Zone</option>
-                        <option value="Public/Park">Public/Park</option>
-                    </select>
-                </div>
+    <label for="environmentType">Environment Type</label>
+    <select id="environmentType" required onchange="checkFormReady()">
+        <option value="">Select environment...</option>
+        <option value="Residential (Quiet)">Residential (Quiet)</option>
+        <option value="Residential (Busy)">Residential (Busy)</option>
+        <option value="Commercial/Market">Commercial/Market</option>
+        <option value="Indoor (Office/Classroom)">Indoor – Office/Classroom</option>
+        <option value="Industrial Zone">Industrial Zone</option>
+        <option value="Public Park">Public Park</option>
+        <option value="Road/Highway">Road / Highway</option>
+        <option value="Transit (Bus/Metro)">Transit – Bus / Metro</option>
+    </select>
+</div>
+
+<div class="form-group">
+    <label for="timeOfDay">Time of Day</label>
+    <select id="timeOfDay" required onchange="checkFormReady()">
+        <option value="">Confirm time...</option>
+        <option value="morning">Morning (6 AM – 12 PM)</option>
+        <option value="afternoon">Afternoon (12 – 5 PM)</option>
+        <option value="evening">Evening (5 – 9 PM)</option>
+        <option value="night">Night (9 PM – 6 AM)</option>
+    </select>
+</div>
+
+<div class="form-group">
+    <label for="dominantSound">Dominant Sound Source</label>
+    <select id="dominantSound" onchange="checkFormReady()">
+        <option value="">Select (optional)</option>
+        <option value="Traffic">Traffic</option>
+        <option value="Crowd/People">Crowd / People</option>
+        <option value="Construction">Construction</option>
+        <option value="Nature">Nature (birds, wind)</option>
+        <option value="Music/Entertainment">Music / Entertainment</option>
+        <option value="Machinery">Machinery</option>
+        <option value="Mixed">Mixed / Hard to tell</option>
+        <option value="Quiet">Quiet / No dominant source</option>
+    </select>
+</div>
+
+<div class="form-group">
+    <label for="weather">Weather Outside</label>
+    <select id="weather" onchange="checkFormReady()">
+        <option value="">Select (optional)</option>
+        <option value="Clear">Clear / Sunny</option>
+        <option value="Cloudy">Cloudy</option>
+        <option value="Rainy">Raining</option>
+        <option value="Windy">Windy</option>
+    </select>
+</div>
 
                 <button type="button" id="startMeasureButton">
                     Start Measurement (5s)
@@ -463,6 +502,7 @@ if ($is_logged_in && !$is_guest) {
                 <input type="hidden" id="latitude" name="latitude">
                 <input type="hidden" id="longitude" name="longitude">
                 <input type="hidden" id="avgNoiseLevel" name="avgNoiseLevel">
+                <input type="hidden" id="peakNoiseLevel" name="peakNoiseLevel">
 
                 <button type="submit" id="submitButton" disabled>Submit Data</button>
             </form>

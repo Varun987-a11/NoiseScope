@@ -13,6 +13,9 @@ let source = null;
 let stream = null;
 let dataArray = null;
 let animationId = null; 
+
+let peakDb = 0;
+
 let readings = [];
 const MEASUREMENT_DURATION = 5000; // 5 seconds
 
@@ -20,7 +23,27 @@ const MEASUREMENT_DURATION = 5000; // 5 seconds
 
 // Rough conversion for demonstration purposes
 function volumeToDb(volume) {
-    return 30 + (volume / 255) * 70; 
+    // return 30 + (volume / 255) * 70;  
+
+    // the above commented line of rough conversion technique is improved and implemented the the block starting next line - 16th may 2026
+   
+    // REPLACE the volumeToDb function:
+function getRMS(dataArray) {
+    let sum = 0;
+    for (let i = 0; i < dataArray.length; i++) {
+        const normalized = (dataArray[i] - 128) / 128;
+        sum += normalized * normalized;
+    }
+    return Math.sqrt(sum / dataArray.length);
+}
+
+function rmsToDb(rms) {
+    if (rms < 0.0001) return 30;
+    return Math.min(100, Math.max(30, Math.round(20 * Math.log10(rms) + 90)));
+}
+
+
+
 }
 
 function startMeasurement() {
@@ -69,12 +92,16 @@ function startMeasurement() {
 }
 
 function runLiveDisplay() {
+    analyser.getByteTimeDomainData(dataArray);
+const rms = getRMS(dataArray);
+const currentDb = rmsToDb(rms);
+
     const dBDisplay = document.getElementById('dBDisplay');
 
     function updateVolume() {
         if (!analyser) return;
 
-        analyser.getByteFrequencyData(dataArray); 
+        // analyser.getByteFrequencyData(dataArray); 
         
         // Find the peak volume
         let maxVolume = 0;
@@ -84,10 +111,14 @@ function runLiveDisplay() {
             }
         }
         
-        const currentDb = Math.round(volumeToDb(maxVolume));
+        // const currentDb = Math.round(volumeToDb(maxVolume));
         
         dBDisplay.textContent = currentDb;
         readings.push(currentDb);
+
+        if (currentDb > peakDb) 
+            peakDb = currentDb;
+
 
         animationId = requestAnimationFrame(updateVolume);
     }
@@ -109,6 +140,7 @@ function stopMeasurement() {
         audioContext.close();
     }
     
+    
     // 2. Calculate Average
     const sum = readings.reduce((a, b) => a + b, 0);
     const average = readings.length > 0 ? Math.round(sum / readings.length) : 0;
@@ -124,6 +156,9 @@ function stopMeasurement() {
     }
     
     avgNoiseLevel = average;
+
+    document.getElementById('peakNoiseLevel').value = peakDb;
+
     startButton.disabled = false;
     checkFormReady();
 }
@@ -143,13 +178,20 @@ async function submitData(e) {
     const locationName = document.getElementById('locationName').value;
     const environmentType = document.getElementById('environmentType').value;
 
-    const payload = {
-        locationName: locationName,
-        latitude: coords.lat,
-        longitude: coords.lng,
-        avgNoiseLevel: avgNoiseLevel,
-        environmentType: environmentType
-    };
+const payload = {
+    locationName:   document.getElementById('locationName').value,
+    latitude:       coords.lat,
+    longitude:      coords.lng,
+    avgNoiseLevel:  avgNoiseLevel,
+    peakNoiseLevel: peakDb,
+    environmentType: document.getElementById('environmentType').value,
+    timeOfDay:      document.getElementById('timeOfDay').value,
+    placeType:      document.getElementById('environmentType').value,  // reuse for now
+    dominantSound:  document.getElementById('dominantSound').value,
+    weather:        document.getElementById('weather').value
+};
+
+
 
     const submitButton = document.getElementById('submitButton');
     submitButton.disabled = true;
@@ -178,6 +220,8 @@ async function submitData(e) {
         statusMessage.style.color = 'red';
         statusMessage.textContent = 'Network error. Could not reach the server.';
     } finally {
+        peakDb = 0;
+
         submitButton.disabled = false;
         submitButton.textContent = 'Submit Noise Data';
         avgNoiseLevel = null;
@@ -283,9 +327,26 @@ async function loadDataAndVisualize() {
     }
 }
 
+// function checkFormReady() {
+//     const isReady = avgNoiseLevel !== null && coords !== null && document.getElementById('locationName').value && document.getElementById('environmentType').value;
+//     document.getElementById('submitButton').disabled = !isReady;
+// }
+
+// above block replaced with the following block for production - 16th may 2026
+
 function checkFormReady() {
-    const isReady = avgNoiseLevel !== null && coords !== null && document.getElementById('locationName').value && document.getElementById('environmentType').value;
-    document.getElementById('submitButton').disabled = !isReady;
+    const isReady = avgNoiseLevel !== null && coords !== null 
+    && document.getElementById('locationName').value 
+    && document.getElementById('environmentType').value
+    && document.getElementById('timeOfDay').value;
+
 }
 
+
+
 document.addEventListener('DOMContentLoaded', initializeMap);
+
+
+
+
+
